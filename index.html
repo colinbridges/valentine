@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine 💖</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+    margin: 0;
+    height: 100vh;
+
+    /* Cute Valentine gradient */
+    background: linear-gradient(
+        135deg,
+        #ffd6e0,
+        #ffe6f0,
+        #fff0f6
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    }
+
+
+    .card {
+    background: white;
+    padding: 60px 50px;        
+    border-radius: 35px;       
+    text-align: center;
+    box-shadow: 0 30px 60px rgba(255, 77, 109, 0.35);
+    width: 90%;
+    max-width: 520px;         
+    }
+
+    h1 {
+    color: #ff4d6d;
+    margin-bottom: 40px;
+    font-size: 2.2rem;       
+    font-weight: 700;
+    }
+
+
+button {
+  padding: 16px 40px;
+  font-size: 20px;
+  border: none;
+  border-radius: 999px;      
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+    #yes {
+      background: #ff4d6d;
+      color: white;
+      margin-right: 15px;
+    }
+
+    #no {
+      background: #ccc;
+      color: #555;
+      position: absolute;
+    }
+
+.celebration {
+  position: fixed;
+  inset: 0;
+
+  /* Animated sloth background */
+  background-image: url("https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+
+  color: white;
+  animation: pop 0.8s ease;
+
+  /* dark overlay so text stays readable */
+  box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.35);
+}
+
+
+    .celebration h1 {
+      font-size: 3rem;
+      color: white; /* force white YAY */
+      margin-bottom: 10px;
+    }
+
+    .celebration p {
+      font-size: 1.2rem;
+    }
+
+    .celebration img {
+      width: 450px;
+      max-width: 90%;
+      margin-top: 30px;
+      border-radius: 20px;
+    }
+
+    .hearts {
+      font-size: 2rem;
+      margin-top: 15px;
+      animation: float 2s infinite alternate;
+    }
+
+    #yes:hover {
+      box-shadow: 0 0 25px rgba(255, 77, 109, 0.6);
+      transform: scale(1.05);
+    }
+
+
+    @keyframes pop {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes float {
+      from { transform: translateY(0); }
+      to { transform: translateY(-15px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>V, will you be my Valentine? 💘</h1>
+    <button id="yes">Yes 💕</button>
+    <button id="no">No 🙃</button>
+  </div>
+
+  <div class="celebration" id="celebration">
+    <h1>YAYAYAY!!! 💖</h1>
+    <p>I can't wait to see you!!!</p>
+
+    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="Happy celebration gif">
+
+    <div class="hearts">💘 💕 💖 💞 💓</div>
+  </div>
+
+<script>
+  const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+  const celebration = document.getElementById("celebration");
+
+  let yesScale = 1;
+
+  noBtn.addEventListener("mouseover", () => {
+    // Move the No button
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+    noBtn.style.left = `${x}px`;
+    noBtn.style.top = `${y}px`;
+
+    // Grow the Yes button
+    yesScale += 0.15;
+    yesBtn.style.transform = `scale(${yesScale})`;
+
+    // Final boss behavior
+    if (yesScale > 1.7) {
+      noBtn.textContent = "Just say yes 😌";
+    }
+    if (yesScale > 2.4) {
+      noBtn.style.display = "none";
+    }
+  });
+
+  yesBtn.addEventListener("click", () => {
+    celebration.style.display = "flex";
+
+    const items = celebration.children;
+    Array.from(items).forEach((el, i) => {
+      el.style.opacity = 0;
+      el.style.transform = "translateY(10px)";
+      setTimeout(() => {
+        el.style.opacity = 1;
+        el.style.transform = "translateY(0)";
+        el.style.transition = "all 0.5s ease";
+      }, i * 300);
+    });
+  });
+</script>
+
+
+
+</body>
+</html>
